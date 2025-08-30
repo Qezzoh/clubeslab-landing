@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ClubesLab — Diseña, comparte y descubre builds de Clubes en FC26</title>
+  <meta name="description" content="Crea tus árboles de habilidades para FC26 Clubes. Prueba builds sin riesgo, guárdalas y compártelas con la comunidad.">
+  <meta property="og:title" content="ClubesLab — Builder de árboles de habilidades para FC26 Clubes">
+  <meta property="og:description" content="Diseña, comparte y descubre builds de Clubes en FC26.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://clubeslab.com/og.png">
+  <meta name="theme-color" content="#0b0d10">
+  <link rel="icon" href="logo.png">
+  <style>
+    :root{
+      --bg:#0b0d10; --card:#12161b; --muted:#98a2b3; --text:#e6e9ee; --accent:#d0f; --accent-2:#39f;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; background:radial-gradient(1200px 800px at 50% -10%, #1a2230 0%, #0b0d10 60%);
+      color:var(--text); font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Helvetica Neue, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      display:flex; align-items:center; justify-content:center; padding:24px;
+    }
+    .wrap{width:min(960px,100%); text-align:center}
+    .card{
+      background:linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
+      border:1px solid rgba(255,255,255,0.08); border-radius:24px; padding:32px; backdrop-filter: blur(6px);
+      box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+    }
+    .logo{width:120px;height:120px;margin:0 auto 16px;display:block;filter: drop-shadow(0 0 12px rgba(255,255,255,0.15));}
+    h1{font-size: clamp(28px, 4vw, 44px); margin: 12px 0 8px; letter-spacing:0.2px}
+    p.sub{font-size: clamp(16px, 2.4vw, 20px); color: var(--muted); margin:0 0 24px}
+    form{display:flex; gap:12px; justify-content:center; flex-wrap:wrap; margin-top:8px}
+    input[type=email]{
+      background:#0f1319; border:1px solid rgba(255,255,255,0.14); color:var(--text);
+      padding:14px 16px; border-radius:12px; min-width:260px; font-size:16px; outline:none;
+    }
+    input[type=email]::placeholder{color:#94a3b8}
+    button{
+      background:linear-gradient(90deg, var(--accent), var(--accent-2));
+      color:white; border:none; padding:14px 18px; border-radius:12px; font-size:16px; font-weight:600; cursor:pointer;
+      box-shadow: 0 6px 24px rgba(57,149,255,0.35), inset 0 0 10px rgba(255,255,255,0.12);
+    }
+    .note{margin-top:16px; font-size:13px; color:#a1a1aa}
+    .footer{margin-top:22px; font-size:12px; color:#8b95a7}
+    .badge{display:inline-block; margin-top:10px; font-size:12px; color:#cbd5e1; opacity:0.9; border:1px solid rgba(255,255,255,0.12); padding:6px 10px; border-radius:999px}
+  </style>
+  <!-- Google AdSense: pega aquí tu script de AdSense cuando te lo aprueben -->
+</head>
+<body>
+  <main class="wrap">
+    <div class="card">
+      <img class="logo" src="logo.png" alt="ClubesLab logo" />
+      <h1>ClubesLab</h1>
+      <p class="sub">Diseña, comparte y descubre <strong>builds</strong> de Clubes en FC26.</p>
+      <form id="signup" aria-label="Suscripción al lanzamiento">
+        <input type="email" name="email" placeholder="Tu correo electrónico" required>
+        <button type="submit">Avísame</button>
+      </form>
+      <div id="status" class="badge" role="status" aria-live="polite" style="display:none;"></div>
+      <p class="note">Crea tus árboles de habilidades, pruébalos sin riesgo y compártelos con la comunidad.</p>
+      <p class="footer">ClubesLab es un proyecto hecho por fans y no está afiliado con EA Sports.</p>
+    </div>
+  </main>
+  <script>
+    // 💌 Configura tu endpoint real para capturar emails (p.ej. Formspree / MailerLite / Supabase)
+    const EMAIL_ENDPOINT = ""; // Ejemplo Formspree: "https://formspree.io/f/xxxxxx"
+
+    const form = document.getElementById('signup');
+    const status = document.getElementById('status');
+    form.addEventListener('submit', async (e)=>{
+      e.preventDefault();
+      const email = new FormData(form).get('email');
+      if(!EMAIL_ENDPOINT){
+        status.style.display='inline-block';
+        status.textContent = "Configura tu endpoint de email en el código (EMAIL_ENDPOINT).";
+        return;
+      }
+      try{
+        const res = await fetch(EMAIL_ENDPOINT, {
+          method: 'POST',
+          headers: {'Accept':'application/json','Content-Type':'application/json'},
+          body: JSON.stringify({ email })
+        });
+        if(res.ok){
+          status.style.display='inline-block';
+          status.textContent = "¡Listo! Te avisaremos al lanzamiento.";
+          form.reset();
+        } else {
+          throw new Error('Error en el envío');
+        }
+      }catch(err){
+        status.style.display='inline-block';
+        status.textContent = "No se pudo enviar. Inténtalo más tarde.";
+      }
+    });
+  </script>
+</body>
+</html>
