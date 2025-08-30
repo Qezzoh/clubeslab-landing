@@ -3,14 +3,18 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>ClubsLAB</title>
-  <meta name="description" content="Crea tus árboles de habilidades para FC26 Clubes. Prueba builds sin riesgo, guárdalas y compártelas con la comunidad.">
-  <meta property="og:title" content="ClubesLab — Builder de árboles de habilidades para FC26 Clubes">
-  <meta property="og:description" content="Diseña, comparte y descubre builds de Clubes en FC26.">
+  <title>ClubsLAB — Experimenta, comparte y valora builds de Clubes FC26</title>
+  <meta name="description" content="Crea tus propios experimentos, diseña tus builds y recibe feedback de la comunidad.">
+  <meta property="og:title" content="ClubsLAB — Experimenta y comparte builds de Clubes FC26">
+  <meta property="og:description" content="Crea tus propios experimentos, diseña tus builds y recibe feedback de la comunidad.">
   <meta property="og:type" content="website">
-  <meta property="og:image" content="https://clubeslab.com/og.png">
+  <meta property="og:image" content="https://clubslab.com/og.png">
   <meta name="theme-color" content="#0b0d10">
   <link rel="icon" href="logo.png">
+
+  <!-- Fuente Anton de Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
+
   <style>
     :root{
       --bg:#0b0d10; --card:#12161b; --muted:#98a2b3; --text:#e6e9ee; --accent:#d0f; --accent-2:#39f;
@@ -29,7 +33,12 @@
       box-shadow: 0 10px 40px rgba(0,0,0,0.4);
     }
     .logo{width:120px;height:120px;margin:0 auto 16px;display:block;filter: drop-shadow(0 0 12px rgba(255,255,255,0.15));}
-    h1{font-size: clamp(28px, 4vw, 44px); margin: 12px 0 8px; letter-spacing:0.2px}
+    h1{
+      font-family: 'Anton', sans-serif;
+      font-size: clamp(36px, 6vw, 64px);
+      margin: 12px 0 8px;
+      letter-spacing:1px;
+    }
     p.sub{font-size: clamp(16px, 2.4vw, 20px); color: var(--muted); margin:0 0 24px}
     form{display:flex; gap:12px; justify-content:center; flex-wrap:wrap; margin-top:8px}
     input[type=email]{
@@ -51,9 +60,9 @@
 <body>
   <main class="wrap">
     <div class="card">
-      <img class="logo" src="logo.png" alt="ClubesLab logo" />
+      <img class="logo" src="logo.png" alt="ClubsLAB logo" />
       <h1>ClubsLAB</h1>
-      <p class="sub">Diseña, comparte y descubre <strong>builds</strong> de Clubes en FC26.</p>
+      <p class="sub">Experimenta, comparte, descubre y valora <strong>builds</strong> de Clubes FC26.</p>
       <form id="signup" aria-label="Suscripción al lanzamiento">
         <input type="email" name="email" placeholder="Tu correo electrónico" required>
         <button type="submit">Avísame</button>
@@ -64,7 +73,7 @@
     </div>
   </main>
   <script>
-    // 💌 Configura tu endpoint real para capturar emails (p.ej. Formspree / MailerLite / Supabase)
+    // 💌 Configura tu endpoint real para capturar emails (Formspree)
     const EMAIL_ENDPOINT = "https://formspree.io/f/xldwjzkg";
 
     const form = document.getElementById('signup');
