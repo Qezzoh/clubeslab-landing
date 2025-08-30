@@ -33,7 +33,7 @@
       box-shadow: 0 10px 40px rgba(0,0,0,0.4);
     }
     .logo{
-      width: clamp(160px, 25vw, 240px);
+      width:200px;
       height:auto;
       margin:0 auto 16px;
       display:block;
@@ -41,7 +41,7 @@
     }
     h1{
       font-family: 'Anton', sans-serif;
-      font-size: clamp(36px, 6vw, 64px);
+      font-size: clamp(28px, 5vw, 48px);
       margin: 12px 0 8px;
       letter-spacing:1px;
     }
@@ -78,38 +78,5 @@
       <p class="footer">ClubsLAB es un proyecto hecho por fans y no está afiliado con EA Sports.</p>
     </div>
   </main>
-  <script>
-    // 💌 Configura tu endpoint real para capturar emails (Formspree)
-    const EMAIL_ENDPOINT = "https://formspree.io/f/xldwjzkg";
+  <scri
 
-    const form = document.getElementById('signup');
-    const status = document.getElementById('status');
-    form.addEventListener('submit', async (e)=>{
-      e.preventDefault();
-      const email = new FormData(form).get('email');
-      if(!EMAIL_ENDPOINT){
-        status.style.display='inline-block';
-        status.textContent = "Configura tu endpoint de email en el código (EMAIL_ENDPOINT).";
-        return;
-      }
-      try{
-        const res = await fetch(EMAIL_ENDPOINT, {
-          method: 'POST',
-          headers: {'Accept':'application/json','Content-Type':'application/json'},
-          body: JSON.stringify({ email })
-        });
-        if(res.ok){
-          status.style.display='inline-block';
-          status.textContent = "¡Listo! Te avisaremos al lanzamiento.";
-          form.reset();
-        } else {
-          throw new Error('Error en el envío');
-        }
-      }catch(err){
-        status.style.display='inline-block';
-        status.textContent = "No se pudo enviar. Inténtalo más tarde.";
-      }
-    });
-  </script>
-</body>
-</html>
